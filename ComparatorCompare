@@ -1,0 +1,112 @@
+package interview.ComparatorCompare;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+class Movie implements Comparable<Movie>
+{
+	private double rating;
+	private int year;
+	private String name;
+	public double getRating() {
+		return rating;
+	}
+
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public  Movie(String nam,double rat,int yr) {
+		this.name=nam;
+		this.rating=rat;
+		this.year=yr;
+		}
+	
+	@Override
+	public int compareTo(Movie o) {
+		//return (int) (this.rating-o.rating);
+		return this.year-o.year;
+	}
+	
+}
+
+class RatingCompare implements Comparator<Movie>
+{
+	@Override
+	public int compare(Movie o1, Movie o2) {
+		// TODO Auto-generated method stub
+		if(o1.getRating()>o2.getRating())
+			return -1;							// decreasing order
+		if(o1.getRating()<o2.getRating())
+			return 1;
+		else
+			return 0;
+	}
+}
+class YearCompare implements Comparator<Movie>
+{
+	@Override
+	public int compare(Movie o1, Movie o2) {
+		if(o1.getYear()>o2.getYear())
+			return 1;
+		if(o1.getYear()<o2.getYear())
+			return -1;
+		else
+			return 0;
+	}
+	
+}
+
+
+public class ComparatorCompare {
+	
+	public static void main(String [] args)
+	{
+		RatingCompare ratingCompare=new RatingCompare();
+		YearCompare yearCompare=new YearCompare();
+		List<Movie> list=new ArrayList<Movie>();
+		list.add(new Movie("avengers1",7.5, 2019));
+		list.add(new Movie("avengers2",6.5,2014));
+		list.add(new Movie("avengers3",9.5,2018));
+		System.out.println("Compare with Comparable for rating");
+		Collections.sort(list);
+		for(Movie m:list)
+		{
+			System.out.println(m.getName()+" --- "+m.getRating());
+		}
+		System.out.println("compare with Comparator fro rating");
+		Collections.sort(list, ratingCompare);
+		for(Movie m:list)
+		{
+			System.out.println(m.getName()+" --- "+m.getRating());
+		}
+		Collections.sort(list,yearCompare);
+		System.out.println("compare with Comparator for year in increasing order");
+		for(Movie m:list)
+		{
+			System.out.println(m.getName()+" -- "+m.getYear());
+		}
+		
+	}
+
+}
+
+
