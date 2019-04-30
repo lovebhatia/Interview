@@ -1,0 +1,66 @@
+package interview.DeepAndShallowCopy;
+
+class Course implements Cloneable
+{
+	String subject1;
+	String subject2;
+	String subject3;
+	public Course(String sub1,String sub2,String sub3)
+	{
+		this.subject1=sub1;
+		this.subject2=sub2;
+		this.subject3=sub3;
+	}
+	
+	public Object clone() throws CloneNotSupportedException
+	{
+		return super.clone();
+	}
+}
+
+class Students implements Cloneable
+{
+	int id;
+	String name;
+	Course course;
+	
+	public Students(int ids,String names,Course courses)
+	{
+		this.id=ids;
+		this.name=names;
+		this.course=courses;
+	}
+	public Object clone() throws CloneNotSupportedException
+	{
+		Students students=(Students)super.clone();
+		students.course=(Course)course.clone();
+		return students;
+	}
+}
+
+public class DeepCopyinJava {
+	public static void main(String [] args)
+	{
+		Course science=new Course("phusics", "Chemistry","biology");
+		Students students=new Students(1, "Love", science);
+		Students students2=null;
+		try {
+			students2=(Students)students.clone();
+		}catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		System.out.println(students.course.subject3);
+		System.out.println(students2.course.subject3);
+		
+		students2.course.subject3="Math";
+		
+		System.out.println("After subject changed");
+		System.out.println(students.course.subject3+"original object");
+		System.out.println(students2.course.subject3+"Copied object");
+		
+		
+	}
+	
+
+}
