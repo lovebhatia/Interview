@@ -1,0 +1,76 @@
+package interview.equalsHascode;
+
+import java.util.HashMap;
+
+class Students
+{
+	int id;
+	String name;
+	String classname;
+	String Department;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getClassname() {
+		return classname;
+	}
+	public void setClassname(String classname) {
+		this.classname = classname;
+	}
+	public String getDepartment() {
+		return Department;
+	}
+	public void setDepartment(String department) {
+		Department = department;
+	}
+	
+	public boolean equals(Object o)
+	{
+		if(o==null)
+		{
+			return false;
+		}
+		if(o == this)
+		{
+			return true;
+		}
+		Students students=(Students) o;
+		return(this.id==students.id);
+	}
+	@Override
+	public int hashCode()
+	{
+	    final int PRIME = 31;
+	    int result = 1;
+	    result = PRIME * result + getId();
+	    return result;
+	}
+	
+}
+
+
+public class EqualsHascodeExample {
+	public static void main(String [] args)
+	{
+		Students students=new Students();
+		Students students2=new Students();
+		students.setId(100);
+		students2.setId(100);
+		System.out.println(students.equals(students2));
+		HashMap<Students, Students> hashMap=new HashMap<>();
+		hashMap.put(students,students);
+		hashMap.put(students2,students2);
+		System.out.println(hashMap);
+	}
+
+
+}
