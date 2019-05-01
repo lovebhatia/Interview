@@ -1,0 +1,68 @@
+package interview.Immutable;
+
+import java.util.HashMap;
+import java.util.Iterator;
+
+final class FinalClassExample
+{
+	private final int id;
+	private final String name;
+	private final HashMap<String,String> hashMap;
+	
+	public FinalClassExample(int ids,String names,HashMap<String, String> hm)
+	{
+		System.out.println("performing deep copy for objects");
+		this.id=ids;
+		this.name=names;
+		HashMap<String, String> tempMap=new HashMap<>();
+		String key;
+		Iterator<String> it=hm.keySet().iterator();
+		while (it.hasNext()) {
+			key=it.next();
+			System.out.println(key+"in clonong");
+			tempMap.put(key, hm.get(key));
+			}
+		this.hashMap=tempMap;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public String getName() {
+		return name;
+	}
+	public HashMap<String, String> getHashMap() {
+		return hashMap;
+	}
+	
+	
+}
+
+
+public class ImmutableClassExample {
+	public static void main(String [] args)
+	{
+		HashMap<String, String> h1 = new HashMap<String,String>();
+		h1.put("1", "first");
+		h1.put("2", "second");
+		String s = "original";
+		int i=10;
+		FinalClassExample classExample=new FinalClassExample(i, s, h1);
+		System.out.println(s==classExample.getName());
+		System.out.println(h1 == classExample.getHashMap());
+		System.out.println("ce id:"+classExample.getId());
+		System.out.println("ce name:"+classExample.getName());
+		System.out.println("ce testMap:"+classExample.getHashMap());
+		
+		i=20;
+		s="modified";
+		h1.put("3", "third");
+		//print the values again
+		System.out.println("ce id after local variable change:"+classExample.getId());
+		System.out.println("ce name after local variable change:"+classExample.getName());
+		System.out.println("ce testMap after local variable change:"+classExample.getHashMap());
+		
+		
+	}
+
+}
