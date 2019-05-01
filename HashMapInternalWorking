@@ -1,0 +1,36 @@
+package interview.HasmapInternal;
+
+import java.util.HashMap;
+
+class key
+{
+	String tey;
+	public key(String key) {
+		this.tey=key;
+	}
+	public int hashCode()
+	{
+		int hash=tey.charAt(0);
+		System.out.println("Hashcode for key : "+tey+"-"+hash);
+		return hash;
+	}
+	public  boolean equals(Object obj)
+	{
+		return tey.equals(((key)obj).tey); 
+	}
+}
+public class HashMapinternalWorking {
+
+	public static void main(String[] args) {
+		
+		 HashMap map = new HashMap(); 
+	     map.put(new key("vishal"), 20); 
+	     map.put(new key("sachin"), 30); 
+	     map.put(new key("vaibhav"), 40); 
+	     System.out.println(); 
+	     System.out.println("Value for key sachin: " + map.get(new key("sachin"))); 
+	     System.out.println("Value for key vaibhav: " + map.get(new key("vaibhav"))); 
+
+	}
+
+}
