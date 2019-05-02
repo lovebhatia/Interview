@@ -1,0 +1,44 @@
+package org.multiEnhancement;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+class PrintJob implements Runnable
+{
+	String name;
+	public PrintJob(String t) {
+
+		this.name=t;// TODO Auto-generated constructor stub
+	}
+	public void run()
+	{
+		System.out.println(name+" Job started by thread: "+Thread.currentThread().getName());
+		try {
+			Thread.sleep(5000);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		System.out.println(name+" ...Job completed by thread"+Thread.currentThread().getName());
+		
+	}
+}
+
+public class ExecutorJob {
+	
+	public static void main(String [] args)
+	{
+		PrintJob[] jobs= {new  PrintJob("Durga"),new  PrintJob("ravi"),new  PrintJob("shive"),
+				new  PrintJob("love"),new  PrintJob("qartz"),new  PrintJob("train")};
+		ExecutorService executorService=Executors.newFixedThreadPool(4);
+		for(PrintJob job:jobs)
+		{
+			executorService.submit(job);
+		}
+		
+	executorService.shutdown();
+		
+		
+	}
+
+}
