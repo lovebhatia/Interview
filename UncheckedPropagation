@@ -1,0 +1,32 @@
+package org.uncheckExcProp;
+
+class Simple
+{
+	void m()
+	{
+		int data=50/0;
+	}
+	void n()
+	{
+		m();
+	}
+	void p()
+	{
+		try {
+			n();
+		}catch(Exception e)
+		{
+			System.out.println(e);
+		}
+	}
+}
+public class UncheckedPropagation {
+	
+	public static void main(String [] args)
+	{
+		Simple simp=new Simple();
+		simp.p();
+	}
+	
+
+}
