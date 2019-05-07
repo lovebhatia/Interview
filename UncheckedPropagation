@@ -1,10 +1,13 @@
 package org.uncheckExcProp;
 
+import java.io.IOException;
+
 class Simple
 {
 	void m()
 	{
 		int data=50/0;
+		
 	}
 	void n()
 	{
@@ -14,9 +17,33 @@ class Simple
 	{
 		try {
 			n();
+			
 		}catch(Exception e)
 		{
 			System.out.println(e);
+			//throw new ArithmeticException("divide by zero");
+		}
+	}
+}
+
+class Simple2
+{
+	void n() throws IOException
+	{
+		throw new IOException("device error");
+		
+	}
+	void m() throws IOException
+	{
+		n();
+	}
+	void p()
+	{
+		try {
+			m();
+		}catch(Exception e)
+		{
+			System.out.println(e +"Checked");
 		}
 	}
 }
@@ -26,6 +53,8 @@ public class UncheckedPropagation {
 	{
 		Simple simp=new Simple();
 		simp.p();
+		Simple2 simple2=new Simple2();
+		simple2.p();
 	}
 	
 
